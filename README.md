@@ -250,10 +250,94 @@ html страниц. При этом на базовом уровне - с по�
 Фактически коммит содержащий эти изменения: https://github.com/nemilya/rhodes-game-sokoban/commit/2024721252c7301264565fdd42ce579a6bf8a63d
 
 
+Весь контроллер `app/Game/controller.rb` выглядит так:
+
+``` ruby
+  require 'rho'
+  require 'rho/rhocontroller'
+  require 'rho/rhoerror'
+  require 'helpers/browser_helper'
+
+  require 'lib/game_sokoban'
+
+  LEVEL1 =  '
+   #########
+   #  #   .#
+   #@$ $   #
+   # $ ##..#
+   #   #####
+   #########'
+
+  class GameController < Rho::RhoController
+    include BrowserHelper
+    
+    def index
+      @game = GameSokoban.new
+      @game.set_level @params['level'] || LEVEL1
+      @game.sokoban_move(@params['direction'].to_sym) if @params['direction']
+      @level = @game.get_level
+      render
+    end
+
+  end
+```
+
+И шаблон отображения `index.erb`:
+
+    <div data-role="page">
+
+      <div data-role="header" data-position="inline">
+        <h1>Game</h1>
+      </div>
+
+      <div data-role="content">
+        <form action="<%= url_for :action => :index %>" method="get">
+        <pre style="font-size: 20px"><%= @level %></pre>
+        <input type="hidden" name="level" value="<%= @level %>">
+
+        <table>
+          <tr>
+            <td></td>
+            <td align="center"><input type="submit" name="direction" value="up"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><input type="submit" name="direction" value="left"></td>
+            <td></td>
+            <td><input type="submit" name="direction" value="right"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="submit" name="direction" value="down"></td>
+            <td></td>
+          </tr>
+        </table>
+
+        </form>
+
+      </div>
+    </div>
+
+
 Автозапуск страницы
 -------------------
 
 В конфиг файле `rhoconfig.txt` прописываем урл запуска
+
+
+    start_path = '/app/Game'
+
+При запуске приложению будет автоматом открыт контроллер в `Game` и выполнен экшн `index`.
+
+
+Настройки jQuery
+----------------
+
+По умолчанию при переходах на страницы - происходит прокрутка страницы,
+что для игры - не очень хорошо выглядит, поэтому отключены, в настройках jQuery в `layout.erb`:
+
+    $.mobile.defaultPageTransition = 'none';
+
 
 
 Эмулятор
@@ -312,7 +396,7 @@ html страниц. При этом на базовом уровне - с по�
 И нажимаем `Build` кнопку - начнётся фоновый процесс сборки приложения - 
 появится строка с нашей сборкой.
 
-По окончании сборки (пара минут) "Status" станет `COMPLETED` - и справа инока
+По окончании сборки (пара минут) "Status" станет `COMPLETED` - и справа иконка
 для скачивания приложения.
 
 Я для теста выполнил сборки:
@@ -321,7 +405,7 @@ html страниц. При этом на базовом уровне - с по�
 * Android (3.2)   - https://s3.amazonaws.com/rhohub-prod-builds/900177ccdeec463a83cda7b7692e3b9d.zip
 * Android (4.0)   - https://s3.amazonaws.com/rhohub-prod-builds/1f3ae06204eb4988b41138919a173a0a.zip
 
-Для установки необходимо распаковать архив.
+Для установки необходимо распаковать архив после скачивания.
 
 Замечание: для сборки для iOS - необходимо получение лицензии разработчика iPhone
 от Apple - стоимость лицензии около $100/year (надо уточнить), с помощью данной
