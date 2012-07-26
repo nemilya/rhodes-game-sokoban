@@ -1,8 +1,0 @@
-rhodes_path='c:/ruby187/lib/ruby/gems/1.8/gems/rhodes-3.3.3'
-app_version='1.0'
-app_name='rhodes-game-sokoban'
-reload_app_changes=1
-debug_port=
-debug_host='127.0.0.1'
-platform='iphone'
-ext_path=c:/ruby187/lib/ruby/gems/1.8/gems/rhodes-3.3.3/lib/extensions/json;
