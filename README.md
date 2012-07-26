@@ -380,6 +380,9 @@ http://www.sokobano.de/wiki/index.php?title=How_to_play_Sokoban
 
 Для этого заходим на http://rhohub.com - создаём аккаунт.
 
+Инструкция по созданию аккаунта: http://docs.rhomobile.com/rhohub/tutorial
+(необходимо загрузить публичный ключ, для работы с `git`)
+
 После этого создаём приложение.
 
 Далее загружаем исходный код. Для загрузки приложения - используется `git`.
@@ -387,9 +390,9 @@ http://www.sokobano.de/wiki/index.php?title=How_to_play_Sokoban
 Находясь в папке, инициализируем git, добавляем все файлы,
 и выполняем коммит:
 
-* git init
-* git add .
-* git commit -m "first commit"
+* `git init`
+* `git add .`
+* `git commit -m "first commit"`
 
 Добавляем внешний репозиторий:
 
@@ -429,6 +432,7 @@ http://www.sokobano.de/wiki/index.php?title=How_to_play_Sokoban
 * Android (2.3.3) - https://s3.amazonaws.com/rhohub-prod-builds/6a72ca52e6be4c6ea3fd1c67f8c65bcf.zip
 * Android (3.2)   - https://s3.amazonaws.com/rhohub-prod-builds/900177ccdeec463a83cda7b7692e3b9d.zip
 * Android (4.0)   - https://s3.amazonaws.com/rhohub-prod-builds/1f3ae06204eb4988b41138919a173a0a.zip
+* Android (4.0) (новая версия)   - https://s3.amazonaws.com/rhohub-prod-builds/1623f2dc93784ddd9ea5e8e20bf17f40.zip
 
 Для установки необходимо распаковать архив после скачивания.
 
