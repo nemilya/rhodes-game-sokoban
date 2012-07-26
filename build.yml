@@ -1,0 +1,24 @@
+#sdk: "c:/ruby187/lib/ruby/gems/1.8/gems/rhodes-3.3.3"
+sdkversion: 3.3.3
+name: rhodes-game-sokoban
+version: 1.0
+vendor: rhomobile
+build: debug
+bbver: 4.6
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator5.0
+  provisionprofile:
+  codesignidentity:
+  entitlements:
+  BundleIdentifier: com.rhomobile.rhodes-game-sokoban
+  BundleURLScheme: rhodes-game-sokoban
+wp:
+  productid: 'e3f8e560-b914-012f-d6de-0007e9884d1f'
+symbian:
+  uid: '0xee3433ea'
+android:
+  version: 2.1
+
+extensions: ["json", "another-extension"]
