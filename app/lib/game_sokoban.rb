@@ -23,6 +23,10 @@ class GameSokoban
   }
 
   def initialize
+    _reset
+  end
+
+  def _reset
     @cells = [] # rows[cols[]]
     @info = {}
     @sokoban_pos = {} # :col, :row
@@ -36,7 +40,7 @@ class GameSokoban
   end
 
   def set_level(level)
-    @cells = []
+    _reset
     level.split("\n").each do |row|
       elements_in_row = row.chomp.split('')
       @cells << elements_in_row if elements_in_row.size > 0
@@ -50,6 +54,7 @@ class GameSokoban
     @info[:sokoban_cnt]     = 0
     @info[:goals_cnt]       = 0
     @info[:box_on_goal_cnt] = 0
+    @goals = []
     @cells.each_with_index do |row,   row_pos|
       row.each_with_index  do |cell,  col_pos|
         cur_pos = {:col=>col_pos, :row=>row_pos}

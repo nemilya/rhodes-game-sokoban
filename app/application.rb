@@ -1,4 +1,6 @@
 require 'rho/rhoapplication'
+require 'lib/game_sokoban'
+
 
 class AppApplication < Rho::RhoApplication
   def initialize
@@ -6,7 +8,7 @@ class AppApplication < Rho::RhoApplication
     # Super must be called *after* settings @tabs!
     @tabs = nil
 
-
+    @game = GameSokoban.new
 
     #To remove default toolbar uncomment next line:
     #@@toolbar = nil
@@ -15,5 +17,9 @@ class AppApplication < Rho::RhoApplication
     # Uncomment to set sync notification callback to /app/Settings/sync_notify.
     # SyncEngine::set_objectnotify_url("/app/Settings/sync_notify")
     SyncEngine.set_notification(-1, "/app/Settings/sync_notify", '')
+  end
+
+  def game
+    @game
   end
 end
