@@ -433,6 +433,7 @@ http://www.sokobano.de/wiki/index.php?title=How_to_play_Sokoban
 * Android (3.2)   - https://s3.amazonaws.com/rhohub-prod-builds/900177ccdeec463a83cda7b7692e3b9d.zip
 * Android (4.0)   - https://s3.amazonaws.com/rhohub-prod-builds/1f3ae06204eb4988b41138919a173a0a.zip
 * Android (4.0) (новая версия)   - https://s3.amazonaws.com/rhohub-prod-builds/1623f2dc93784ddd9ea5e8e20bf17f40.zip
+* Windows Mobile (6.5) - https://s3.amazonaws.com/rhohub-prod-builds/3905eca5c4d844b0adc587ec082bc9ab.zip
 
 Для установки необходимо распаковать архив после скачивания.
 
