@@ -5,6 +5,9 @@ class AppApplication < Rho::RhoApplication
     # Tab items are loaded left->right, @tabs[0] is leftmost tab in the tab-bar
     # Super must be called *after* settings @tabs!
     @tabs = nil
+
+
+
     #To remove default toolbar uncomment next line:
     #@@toolbar = nil
     super
