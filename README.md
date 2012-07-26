@@ -319,6 +319,7 @@ html страниц. При этом на базовом уровне - с по�
 
 * Android (2.3.3) - https://s3.amazonaws.com/rhohub-prod-builds/6a72ca52e6be4c6ea3fd1c67f8c65bcf.zip
 * Android (3.2)   - https://s3.amazonaws.com/rhohub-prod-builds/900177ccdeec463a83cda7b7692e3b9d.zip
+* Android (4.0)   - https://s3.amazonaws.com/rhohub-prod-builds/1f3ae06204eb4988b41138919a173a0a.zip
 
 Замечание: для сборки для iOS - необходимо получение лицензии разработчика iPhone
 от Apple - стоимость лицензии около $100/year (надо уточнить), с помощью данной
