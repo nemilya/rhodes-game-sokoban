@@ -21,11 +21,11 @@ class GameController < Rho::RhoController
     render
   end
 
-  def play
+  def move
     @game = ::Rho.get_app.game
     @game.sokoban_move(@params['direction'].to_sym) if @params['direction']
-    @level = @game.get_level
-    render :action=>:index
+    level = @game.get_level.gsub("\n", '\n')
+    WebView.execute_js("set_level('#{level}');") 
   end
 
 end

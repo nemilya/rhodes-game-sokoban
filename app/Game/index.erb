@@ -5,28 +5,37 @@
   </div>
 
   <div data-role="content">
-    <form action="<%= url_for :action => :play %>" method="get">
-    <pre style="font-size: 20px"><%= @level %></pre>
+    <pre id="map" style="font-size: 20px"><%= @level %></pre>
 
     <table>
       <tr>
         <td></td>
-        <td align="center"><input type="submit" name="direction" value="up"></td>
+        <td align="center"><input type="button" value="up" onClick="move('up');"></td>
         <td></td>
       </tr>
       <tr>
-        <td><input type="submit" name="direction" value="left"></td>
-        <td align="center"><a href="/app/Game/">restart</a></td>
-        <td><input type="submit" name="direction" value="right"></td>
+        <td><input type="button" value="left" onClick="move('left');"></td>
+        <td align="center"></td>
+        <td><input type="button" value="right" onClick="move('right');"></td>
       </tr>
       <tr>
         <td></td>
-        <td><input type="submit" name="direction" value="down"></td>
+        <td><input type="button" value="down" onClick="move('down');"></td>
         <td></td>
       </tr>
     </table>
 
-    </form>
-
   </div>
 </div>
+
+<script type="text/javascript">
+  function move(direction){
+    $.get('/app/Game/move', { direction: direction});
+    return false;
+  }
+
+  function set_level(level){
+    $('#map').html(level);
+  }
+
+</script>
