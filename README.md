@@ -429,7 +429,7 @@ http://www.sokobano.de/wiki/index.php?title=How_to_play_Sokoban
 
 Я для теста выполнил сборки:
 
-* Android (4.0) - https://s3.amazonaws.com/rhohub-prod-builds/1623f2dc93784ddd9ea5e8e20bf17f40.zip
+* Android (4.0) - https://s3.amazonaws.com/rhohub-prod-builds/623c3c6c4bec4873bf52cecaeed4bf55.zip
 
 
 Для установки необходимо распаковать архив после скачивания.
