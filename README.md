@@ -350,7 +350,8 @@ end
 </script>
 ```
 
-и класс `application.rb` в котором хранится экземпляр Игры:
+и класс `application.rb` в котором происходит подключение библиотеки GameSokoban и 
+хранится экземпляр Игры:
 
 ```ruby
 require 'rho/rhoapplication'
