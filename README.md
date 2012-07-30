@@ -268,74 +268,87 @@ http://www.sokobano.de/wiki/index.php?title=How_to_play_Sokoban
 Фактически коммит содержащий эти изменения: https://github.com/nemilya/rhodes-game-sokoban/commit/2024721252c7301264565fdd42ce579a6bf8a63d
 
 
-Весь контроллер `app/Game/controller.rb` выглядит так (TODO - код уже устарел - в исходниках более новая версия, с более лучшей скоростью):
+Весь контроллер `app/Game/controller.rb` выглядит так (версия с вызовом JS на стороне клиента):
 
 ``` ruby
-  require 'rho'
-  require 'rho/rhocontroller'
-  require 'rho/rhoerror'
-  require 'helpers/browser_helper'
+require 'rho'
+require 'rho/rhocontroller'
+require 'rho/rhoerror'
+require 'helpers/browser_helper'
 
-  require 'lib/game_sokoban'
+LEVEL1 =  '
+ #########
+ #  #   .#
+ #@$ $   #
+ # $ ##..#
+ #   #####
+ #########'
 
-  LEVEL1 =  '
-   #########
-   #  #   .#
-   #@$ $   #
-   # $ ##..#
-   #   #####
-   #########'
-
-  class GameController < Rho::RhoController
-    include BrowserHelper
-    
-    def index
-      @game = GameSokoban.new
-      @game.set_level @params['level'] || LEVEL1
-      @game.sokoban_move(@params['direction'].to_sym) if @params['direction']
-      @level = @game.get_level
-      render
-    end
-
+class GameController < Rho::RhoController
+  include BrowserHelper
+  
+  def index
+    @game = ::Rho.get_app.game
+    @game.set_level LEVEL1
+    @level = @game.get_level
+    render
   end
+
+  def move
+    @game = ::Rho.get_app.game
+    @game.sokoban_move(@params['direction'].to_sym) if @params['direction']
+    level = @game.get_level.gsub("\n", '\n')
+    WebView.execute_js("set_level('#{level}');") 
+  end
+
+end
 ```
 
 И шаблон отображения `index.erb`:
 
-    <div data-role="page">
+```html
+<div data-role="page">
 
-      <div data-role="header" data-position="inline">
-        <h1>Game</h1>
-      </div>
+  <div data-role="header" data-position="inline">
+    <h1>Game</h1>
+  </div>
 
-      <div data-role="content">
-        <form action="<%= url_for :action => :index %>" method="get">
-        <pre style="font-size: 20px"><%= @level %></pre>
-        <input type="hidden" name="level" value="<%= @level %>">
+  <div data-role="content">
+    <pre id="map" style="font-size: 20px"><%= @level %></pre>
 
-        <table>
-          <tr>
-            <td></td>
-            <td align="center"><input type="submit" name="direction" value="up"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><input type="submit" name="direction" value="left"></td>
-            <td></td>
-            <td><input type="submit" name="direction" value="right"></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><input type="submit" name="direction" value="down"></td>
-            <td></td>
-          </tr>
-        </table>
+    <table>
+      <tr>
+        <td></td>
+        <td align="center"><input type="button" value="up" onClick="move('up');"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="left" onClick="move('left');"></td>
+        <td align="center"></td>
+        <td><input type="button" value="right" onClick="move('right');"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="button" value="down" onClick="move('down');"></td>
+        <td></td>
+      </tr>
+    </table>
 
-        </form>
+  </div>
+</div>
 
-      </div>
-    </div>
+<script type="text/javascript">
+  function move(direction){
+    $.get('/app/Game/move', { direction: direction});
+    return false;
+  }
 
+  function set_level(level){
+    $('#map').html(level);
+  }
+
+</script>
+```
 
 Автозапуск страницы
 -------------------
