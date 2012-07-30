@@ -350,6 +350,28 @@ end
 </script>
 ```
 
+и класс `application.rb` в котором хранится экземпляр Игры:
+
+```ruby
+require 'rho/rhoapplication'
+require 'lib/game_sokoban'
+
+class AppApplication < Rho::RhoApplication
+  def initialize
+    @tabs = nil
+
+    @game = GameSokoban.new
+
+    super
+    SyncEngine.set_notification(-1, "/app/Settings/sync_notify", '')
+  end
+
+  def game
+    @game
+  end
+end
+```
+
 Автозапуск страницы
 -------------------
 
